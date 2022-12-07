@@ -1,0 +1,94 @@
+C010	000		jmp	start	skip over variables to start
+0000	001	i	dw	0	int i
+0009	002	j	dw	9	int j
+0070	003	a	dw	70	int a[]
+000A	004	n	dw	10	int n (size hardcoded to 10)
+0000	005	zero	dw	0
+0001	006	one	dw	1
+0000	007	curr	dw	0	current	(a[j])
+0000	008	prev	dw	0	previous (a[j-1])
+3000	009	load*	dw	3000
+4000	00A	store*	dw	4000
+0000	00B	temp	dw	0	
+0000	00C	i2	dw	0
+0000	00D	i3	dw	0
+0009	00E	nine	dw	9
+0000	00F
+3004	010	start	load	n	if(i >= n) jump	to OLoop
+6001	011		sub	i
+E01E  	012		jmpl		
+D01E  	013		jmpe
+300A	014		load	store*
+5003	015		add	a
+5001	016		add	i
+4019	017		store		storage instructions
+1000	018		readH		read in array element
+0000	019	store*
+3001	01A		load	i	increment i
+5006	01B		add	one
+4001	01C		store	i
+C010	01D		jump	start	jump back to beginning of loop
+3004	01E	OLoop	load	n	if(i2 >= n) jump to end of outer loop
+600C	01F		sub	i2
+E04D	020		jmpl
+D04D	021		jmpe
+3002	022	ILoop	load	j	if(i2 >= j) jump to end of inner loop
+600C	023		sub	i2
+E047	024		jmpl
+D047	025		jmpe
+3009	026		load	load*
+5003	027		add	a		
+5002	028		add	j
+402C	029		store
+6006	02A		sub	one
+402E	02B
+0000	02C	load*
+4007	02D		store	curr
+0000	02E	load*
+4008	02F		store	prev
+3008	030		load	prev	if(a[j] >= a[j-1]) jump over swap
+6007	031		sub	curr
+E043	032		jmpl
+D043	033		jmpe
+3007	034		load	curr				
+400B	035		store	temp
+300A	036		load	store*
+5003	037		add	a
+5002	038		add	j
+403B	039		store
+3008	03A		load	prev
+0000	03B	store*
+300A	03C		load	store*
+5003	03D		add	a
+5002	03E		add	j
+6006	03F		sub	one
+4042	040		store
+300B	041		load	temp
+0000	042	store*
+3002	043		load	j	decrement j
+6006	044		sub	one
+4002	045		store	j
+C022	046		jmp	ILoop
+300C	047		load	i2	increment i2
+5006	048		add	one
+400C	049		store	i2
+300E	04A		load	nine	reset j
+4002	04B		store	j
+C01E	04C		jmp	OLoop
+3005	04D		load	zero	initialize loop coniditions
+4001	04E		store	i
+3004	04F	loop	load	n	if(i >= n) skip to end
+6001	050		sub	i
+E05D	051		jmpl
+D05D	052		jmpe
+3009	053		load	load*
+5003	054		add	a
+5001	055		add	i
+4057	056		store
+0000	057	load*
+1800	058		printH
+3001	059		load	i
+5006	05A		add	one
+4001	05B		store	i
+C04F	05C		jmp
+0000	05D		halt

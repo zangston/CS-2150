@@ -1,0 +1,29 @@
+C00A 000		jmp	start	skip around the variables
+0000 001	i	dw	0	int i
+0000 002	j	dw	0	int j
+0000 003	k	dw	0	int k
+0000 004				extra space for changes
+0000 005				
+0000 006
+0000 007
+0000 008
+0000 009
+1000 00A	start	readH		read i
+4001 00B		store	i
+1000 00C		readH		read j
+4002 00D		store	j
+1000 00E		readH		read k
+4003 00F		store	k
+3001 010		load	i	compute sum of ints i, j, k
+5002 011		add	j
+5003 012		add	k
+1800 013		print		print sum of i, j, k
+D016 014		jmpe	end	go to end if sum == 0
+C00A 015		jmp	start	loop if sum != 0
+3001 016		load	i
+1800 017		print		print i
+3002 018		load	j
+1800 019		print		print j
+3003 01A		load	k
+1800 01B		print		print j
+0000 01C		halt		we did it!!!

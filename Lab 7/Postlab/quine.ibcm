@@ -1,0 +1,17 @@
+C004	000		jmp		jump to start
+0010	001	size	dw		size of program
+0001	002	one	dw	1
+3000	003	load*	dw	3000	load instruction
+3001	004	start	load	size	if(i > size) skip to end
+6020	005		sub	i	i is declared outside of program
+E010	006		jmpl	end
+3003	007		load	load*
+5020	008		add	i
+400A	009			store
+300A	00A		
+1800	00B		printH
+3020	00C		load	i
+5002	00D		add	one
+4020	00E		store	i
+C004	00F		jmp	start
+0000	010		halt

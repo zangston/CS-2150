@@ -1,0 +1,44 @@
+int i = 0;
+int j = 9;
+int k = 0;
+int a = XX;
+int n = 10;
+int one = 1;
+int zero = 0;
+int store* = 4000;
+int load* = 3000;
+
+//user input
+i = 0;
+if(i >= n)	//loop
+     jump(end);
+load(store*);
+	add(a);
+	add(i);
+store(store*);
+read;
+store*;
+i++;
+jump(loop);
+
+
+//bubble sort
+
+int i = 0;
+if(i >= n)	//outer loop
+     jump(endOut);
+if(j <= n)	//inner loop
+     jump(endIn);
+if(a[j] < a[j-1])
+	swap(a[j], a[j-1]);
+j--;
+jump(innerloop);
+i++;
+jump(outerloop);
+
+
+//output (which should be sorted)
+for(i = 0; i < 10; i++)
+{
+	print(a[i]);
+}

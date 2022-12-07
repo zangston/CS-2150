@@ -1,0 +1,57 @@
+C00A 000		jmp	start	skip over variables to start
+0000 001	i	dw	0	int i
+0000 002	input	dw	0					
+0040 003	a	dw	40	int a[]
+0000 004	n	dw	0	int n - size of array
+0000 005	zero	dw	0
+0001 006	one	dw	1
+4000 007	store*	dw	4000
+3000 008	load*	dw	3000
+0000 009
+1000 00A	start	readH		read array size
+4004 00B		store	n	
+3005 00C		load	zero	intialize loop conditions
+4001 00D		store	i
+3004 00E	loop	load	n	if(i >= n) jump to end of loop
+6001 00F		sub	i
+E01D 010		jmpl	fwd
+D01D 011		jmpe	fwd
+3007 012		load	store*	aw geez this is gonna be confusing
+5003 013		add	a
+5001 014		add	i
+4018 015		store		store storage instruction in line store*
+1000 016		readH		read input
+4002 017		store	input	pretty sure this line is useless
+0000 018	store*			overwritten instruction to store in array at index i
+3001 019		load	i
+5006 01A		add	one
+4001 01B		store	i
+C00E 01C		jmp	loop
+3005 01D	fwd	load	zero	reinitialize loop conditions for fwd print
+4001 01E		store	i
+3004 01F	loop2	load	n
+6001 020		sub	i
+E02D 021		jmpl	back
+D02D 022		jmpe	back
+3008 023		load	load*
+5003 024		add	a
+5001 025		add	i
+4027 026		store		store loading instruction in line load*
+0000 027	load*			overwritten instruction to load array at index i
+1800 028		printH
+3001 029		load	i
+5006 02A		add	one
+4001 02B		store	i
+C01F 02C		jmp	loop2
+3001 02D	back	load	i
+D038 02E		jmpl	halt
+6006 02F		sub	one
+4001 030		store	i
+3008 031		load	load*
+5003 032		add	a
+5001 033		add	i
+4035 034		store		store loading instruction in line load**
+0000 035	load**			overwritten instruction
+1800 036		printH
+C02D 037		jmp	back
+0000 038		halt
